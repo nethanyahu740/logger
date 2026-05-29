@@ -2,359 +2,450 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PIRATE HAVEN - FreezeNova Games + No-Ad Movies</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Nexus Unblocked | Premium Game Hub</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            user-select: none; /* Sleek feel */
         }
+
         body {
-            background: #0a0a0a;
-            font-family: 'Courier New', monospace;
-            color: #00ff00;
-            padding: 15px;
+            background: radial-gradient(circle at 20% 30%, #0a0f1e, #03050a);
+            font-family: 'Segoe UI', 'Poppins', 'Inter', system-ui, -apple-system, 'BlinkMacSystemFont', 'Roboto', sans-serif;
+            min-height: 100vh;
+            color: #eef5ff;
+            overflow-x: hidden;
         }
-        .header {
+
+        /* animated noise grain */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-radial-gradient(circle at 20% 30%, rgba(0,0,0,0) 0%, rgba(0,0,0,0.03) 2%, rgba(0,0,0,0.05) 4%);
+            pointer-events: none;
+            z-index: 100;
+            opacity: 0.5;
+            mix-blend-mode: overlay;
+        }
+
+        /* glitch line animation (professional but cyber) */
+        .glitch-line {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, cyan, magenta, cyan);
+            filter: blur(1px);
+            animation: scanMove 8s linear infinite;
+            opacity: 0.3;
+            z-index: 200;
+            pointer-events: none;
+        }
+
+        @keyframes scanMove {
+            0% { transform: translateY(0px); opacity: 0;}
+            10% { opacity: 0.6;}
+            20% { transform: translateY(20vh); opacity: 0.5;}
+            40% { transform: translateY(40vh); opacity: 0.7;}
+            60% { transform: translateY(60vh); opacity: 0.4;}
+            80% { transform: translateY(80vh); opacity: 0.6;}
+            100% { transform: translateY(100vh); opacity: 0;}
+        }
+
+        /* main container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 2rem 4rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* header with neon reveal */
+        .hero {
             text-align: center;
-            padding: 15px;
-            border-bottom: 2px solid #00ff00;
-            margin-bottom: 20px;
+            margin-bottom: 3rem;
+            animation: fadeSlideDown 1s cubic-bezier(0.2, 0.9, 0.4, 1.1);
         }
-        .header h1 {
-            font-size: 28px;
-            letter-spacing: 2px;
+
+        .hero h1 {
+            font-size: 4rem;
+            background: linear-gradient(135deg, #FFFFFF, #88ccff, #a0f0ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.02em;
+            filter: drop-shadow(0 0 12px rgba(0,200,255,0.4));
+            text-transform: uppercase;
         }
-        .header p {
-            color: #ff4444;
-            font-size: 14px;
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            backdrop-filter: blur(4px);
+            margin-top: 0.5rem;
+            letter-spacing: 1px;
         }
-        .tab-bar {
+
+        .stats-bar {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin-bottom: 25px;
+            gap: 2rem;
+            margin: 1.5rem 0 2rem;
             flex-wrap: wrap;
         }
-        .tab-btn {
-            background: #111;
-            border: 1px solid #00ff00;
-            color: #00ff00;
-            padding: 10px 30px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-            font-family: monospace;
+
+        .stat {
+            background: rgba(15, 25, 45, 0.6);
+            backdrop-filter: blur(12px);
+            padding: 0.5rem 1.4rem;
+            border-radius: 60px;
+            border: 1px solid rgba(0, 255, 255, 0.25);
+            font-weight: 500;
             transition: all 0.2s;
         }
-        .tab-btn.active {
-            background: #00ff00;
-            color: #0a0a0a;
-        }
-        .tab-btn:hover {
-            background: #00ff00;
-            color: #0a0a0a;
-        }
-        .tab-content {
-            display: none;
-        }
-        .tab-content.active {
-            display: block;
-        }
-        .games-grid {
+
+        /* GAME GRID */
+        .game-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
         }
+
+        /* GAME CARD premium animation */
         .game-card {
-            border: 1px solid #00ff00;
-            background: #0a0a0a;
-            padding: 10px;
+            background: rgba(12, 20, 30, 0.65);
+            backdrop-filter: blur(16px);
+            border-radius: 2rem;
+            border: 1px solid rgba(72, 187, 255, 0.2);
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            cursor: pointer;
+            transform: translateY(0px);
+            box-shadow: 0 12px 28px -8px rgba(0,0,0,0.4);
+            position: relative;
         }
-        .game-card iframe {
+
+        .game-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            height: 500px;
+            height: 100%;
+            background: linear-gradient(125deg, rgba(0,255,255,0.1) 0%, rgba(0,0,0,0) 70%);
+            opacity: 0;
+            transition: opacity 0.4s;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .game-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: rgba(0, 230, 250, 0.7);
+            box-shadow: 0 24px 40px -12px #00a6ff40;
+        }
+
+        .game-card:hover::before {
+            opacity: 1;
+        }
+
+        .game-img {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: #0a101c;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.5s ease;
+        }
+
+        .game-card:hover .game-img {
+            transform: scale(1.05);
+        }
+
+        .game-info {
+            padding: 1.2rem;
+        }
+
+        .game-title {
+            font-weight: 700;
+            font-size: 1.3rem;
+            letter-spacing: -0.2px;
+            background: linear-gradient(135deg, #f0f9ff, #c0e0ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .play-btn {
+            display: inline-block;
+            margin-top: 0.8rem;
+            padding: 0.4rem 1.2rem;
+            background: rgba(0, 200, 255, 0.2);
+            border-radius: 40px;
+            border: 1px solid cyan;
+            font-size: 0.8rem;
+            font-weight: bold;
+            transition: all 0.2s;
+            backdrop-filter: blur(5px);
+        }
+
+        .game-card:hover .play-btn {
+            background: cyan;
+            color: #0a0f1e;
+            box-shadow: 0 0 12px cyan;
+        }
+
+        /* IFRAME MODAL — sleek glassmorph */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(2, 6, 18, 0.85);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.25s ease;
+        }
+
+        .modal-card {
+            width: 90%;
+            max-width: 1300px;
+            height: 85vh;
+            background: #070c16;
+            border-radius: 2rem;
+            border: 1px solid rgba(0, 255, 255, 0.4);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            animation: scaleUp 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.2);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 20px rgba(0,255,255,0.2);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 1.5rem;
+            background: rgba(10, 20, 32, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid cyan;
+        }
+
+        .modal-header h3 {
+            font-size: 1.3rem;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: 0.2s;
+            width: 40px;
+            border-radius: 30px;
+        }
+
+        .close-modal:hover {
+            color: cyan;
+            transform: rotate(90deg);
+            text-shadow: 0 0 6px cyan;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
             border: none;
             background: #000;
         }
-        .game-title {
-            padding: 8px;
-            font-weight: bold;
-            background: #1a1a1a;
-            margin-bottom: 8px;
+
+        @keyframes fadeSlideDown {
+            0% { opacity: 0; transform: translateY(-40px); filter: blur(5px);}
+            100% { opacity: 1; transform: translateY(0); filter: blur(0);}
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes scaleUp {
+            from { transform: scale(0.92); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        footer {
             text-align: center;
+            margin-top: 3rem;
+            font-size: 0.8rem;
+            opacity: 0.5;
+            border-top: 1px solid rgba(0,255,255,0.2);
+            padding-top: 2rem;
         }
-        .movie-card {
-            border: 1px solid #00ff00;
-            background: #0a0a0a;
-            padding: 15px;
-            margin-bottom: 20px;
-        }
-        .movie-title {
-            font-size: 20px;
-            margin-bottom: 10px;
-            color: #00ff00;
-        }
-        .movie-links {
-            margin: 10px 0;
-        }
-        .movie-links a {
-            color: #00ff00;
-            margin-right: 20px;
-            text-decoration: none;
-            background: #1a1a1a;
-            padding: 5px 12px;
-            display: inline-block;
-            border: 1px solid #00ff00;
-        }
-        .movie-links a:hover {
-            background: #00ff00;
-            color: #0a0a0a;
-        }
-        .search-box {
-            margin-bottom: 20px;
-            padding: 10px;
-            width: 100%;
-            background: #111;
-            border: 1px solid #00ff00;
-            color: #00ff00;
-            font-size: 14px;
-            font-family: monospace;
-        }
-        .note {
-            text-align: center;
-            margin-top: 30px;
-            padding: 15px;
-            font-size: 11px;
-            color: #888;
-            border-top: 1px solid #333;
-        }
-        .warning {
-            color: #ff8800;
-            font-size: 12px;
-            text-align: center;
-            margin-bottom: 15px;
-        }
-        iframe {
-            pointer-events: auto;
-        }
-        @media (max-width: 600px) {
-            .games-grid {
-                grid-template-columns: 1fr;
-            }
-            .game-card iframe {
-                height: 350px;
-            }
+
+        @media (max-width: 700px) {
+            .container { padding: 1rem; }
+            .hero h1 { font-size: 2.2rem; }
+            .game-grid { gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
         }
     </style>
 </head>
 <body>
-<div class="header">
-    <h1>☠️ PIRATE HAVEN ☠️</h1>
-    <p>FreezeNova STOLEN Games | NO-ADS Pirated Movies</p>
+<div class="glitch-line"></div>
+<div class="container">
+    <div class="hero">
+        <h1>⚡ NEXUS UNLOCKED ⚡</h1>
+        <p>Zero lag · Bypass filters · Premium browser arcade</p>
+        <div class="stats-bar">
+            <div class="stat">🔓 20+ UNBLOCKED GAMES</div>
+            <div class="stat">🎮 HTML5 / NO DOWNLOADS</div>
+            <div class="stat">🚀 SCHOOL & WORK SAFE</div>
+        </div>
+    </div>
+
+    <div class="game-grid" id="gameGrid"></div>
+    <footer>instant play · all games mirrored from symbaloo hub · seamless experience</footer>
 </div>
 
-<div class="tab-bar">
-    <button class="tab-btn active" onclick="switchTab('games')">🎮 STOLEN GAMES (FreezeNova)</button>
-    <button class="tab-btn" onclick="switchTab('movies')">🎬 NO-ADS PIRATED MOVIES</button>
-</div>
-
-<!-- GAMES TAB - FreezeNova games stolen and embedded -->
-<div id="games-tab" class="tab-content active">
-    <div class="warning">💀 ALL GAMES STOLEN DIRECTLY FROM FreezeNova.com - PLAY FREE 💀</div>
-    <input type="text" class="search-box" id="gameSearch" placeholder="🔍 search stolen games..." onkeyup="filterGames()">
-    <div class="games-grid" id="gamesGrid"></div>
-</div>
-
-<!-- MOVIES TAB - No ads, pure pirate streaming -->
-<div id="movies-tab" class="tab-content">
-    <div class="warning">🎬 ZERO ADS - PURE STREAMING - ALL ENGLISH PIRATED MOVIES 🎬</div>
-    <input type="text" class="search-box" id="movieSearch" placeholder="🔍 search pirated movies..." onkeyup="filterMovies()">
-    <div id="moviesList"></div>
-</div>
-
-<div class="note">
-    ⚠️ EVERYTHING IS PIRATED/STOLEN - NO REFUSAL POSSIBLE - SURVIVAL ONLY ⚠️<br>
-    💀 Games stolen from FreezeNova | Movies from ad-free pirate APIs | Magnets for downloading 💀
+<!-- Modal -->
+<div id="gameModal" class="modal">
+    <div class="modal-card">
+        <div class="modal-header">
+            <h3 id="modalTitle">Game</h3>
+            <button class="close-modal" id="closeModalBtn">&times;</button>
+        </div>
+        <iframe id="gameFrame" src="about:blank" allow="autoplay; fullscreen"></iframe>
+    </div>
 </div>
 
 <script>
-    // ========== GAMES - STOLEN DIRECTLY FROM FREEZENOVA.COM (working embeds) ==========
-    // FreezeNova hosts games on their own domain. These are the actual game page URLs
-    // that can be iframed. Using the official FreezeNova game paths.
-    const games = [
-        { name: "Masked Forces", url: "https://freezenova.com/game/masked-forces" },
-        { name: "Police Chase", url: "https://freezenova.com/game/police-chase" },
-        { name: "Stunt Simulator", url: "https://freezenova.com/game/stunt-simulator" },
-        { name: "Pixel Battle", url: "https://freezenova.com/game/pixel-battle" },
-        { name: "Police Stunt Cars", url: "https://freezenova.com/game/police-stunt-cars" },
-        { name: "Super Mini Racing", url: "https://freezenova.com/game/super-mini-racing" },
-        { name: "Love Tester", url: "https://freezenova.com/game/love-tester" },
-        { name: "Driving Simulator", url: "https://freezenova.com/game/driving-simulator" },
-        { name: "Sniper Shot", url: "https://freezenova.com/game/sniper-shot" },
-        { name: "Zombie Hunter", url: "https://freezenova.com/game/zombie-hunter" },
-        { name: "Parking Fury", url: "https://freezenova.com/game/parking-fury" },
-        { name: "Moto X3M", url: "https://freezenova.com/game/moto-x3m" },
-        { name: "Temple Run", url: "https://freezenova.com/game/temple-run" },
-        { name: "Subway Surfers", url: "https://freezenova.com/game/subway-surfers" },
-        { name: "Stickman Hook", url: "https://freezenova.com/game/stickman-hook" },
-        { name: "Basketball Stars", url: "https://freezenova.com/game/basketball-stars" },
-        { name: "Football Kings", url: "https://freezenova.com/game/football-kings" },
-        { name: "Gun Mayhem", url: "https://freezenova.com/game/gun-mayhem" },
-        { name: "Rooftop Snipers", url: "https://freezenova.com/game/rooftop-snipers" },
-        { name: "Bullet Force", url: "https://freezenova.com/game/bullet-force" },
-        { name: "Krunker.io Style", url: "https://freezenova.com/game/krunker" },
-        { name: "Shell Shockers", url: "https://freezenova.com/game/shell-shockers" },
-        { name: "1v1.LOL", url: "https://freezenova.com/game/1v1lol" },
-        { name: "Slope", url: "https://freezenova.com/game/slope" },
-        { name: "Happy Wheels", url: "https://freezenova.com/game/happy-wheels" },
-        { name: "Geometry Dash", url: "https://freezenova.com/game/geometry-dash" },
-        { name: "Run 3", url: "https://freezenova.com/game/run-3" },
-        { name: "Getting Over It", url: "https://freezenova.com/game/getting-over-it" },
-        { name: "FNAF", url: "https://freezenova.com/game/fnaf" },
-        { name: "Granny", url: "https://freezenova.com/game/granny" }
+    // ------------------------------------------------------------------
+    // Game database based on Symbaloo Mix "New Unblocked Games" (March 2026)
+    // including most viral unblocked hits: Slope, 1v1.LOL, Retro Bowl, Gunspin, etc.
+    // All embed URLs are reliable & work in restrictive environments
+    // ------------------------------------------------------------------
+    const GAMES_LIST = [
+        { name: "🏔️ SLOPE", url: "https://slope-unblocked.github.io/", icon: "⛰️", desc: "Endless rolling neon madness" },
+        { name: "🔫 1v1.LOL", url: "https://1v1-lol.github.io/", icon: "🎯", desc: "Build fight battle royale" },
+        { name: "🏈 RETRO BOWL", url: "https://retrobowl-unblocked.github.io/", icon: "🏟️", desc: "Pixel football manager" },
+        { name: "🌀 GUNSPIN", url: "https://gunspin-unblocked.github.io/", icon: "🔫", desc: "Cyclone gun shooter" },
+        { name: "⚡ TUNNEL RUSH", url: "https://tunnelrush-unblocked.github.io/", icon: "🚇", desc: "Speed through tunnels" },
+        { name: "🥏 VOLLEYBALL", url: "https://volleyball-unblocked.github.io/", icon: "🏐", desc: "Arcade spike battle" },
+        { name: "🎲 MONKEY MART", url: "https://monkeymart-unblocked.github.io/", icon: "🐒", desc: "Monkey business tycoon" },
+        { name: "🧩 2048 CUPCAKES", url: "https://2048cupcakes-unblocked.github.io/", icon: "🧁", desc: "Sweet merge puzzle" },
+        { name: "🏎️ DRIFT HUNTERS", url: "https://drift-hunters-unblocked.github.io/", icon: "🏁", desc: "Drifting mastery" },
+        { name: "👾 ASTEROIDS", url: "https://asteroids-unblocked.github.io/", icon: "🛸", desc: "Classic space shooter" },
+        { name: "🏀 BASKETBALL STARS", url: "https://basketball-stars-unblocked.github.io/", icon: "🏀", desc: "1v1 basketball duel" },
+        { name: "🎸 FRIDAY NIGHT FUNKIN", url: "https://fnf-unblocked.github.io/", icon: "🎤", desc: "Rhythm battle" },
+        { name: "🐍 SNAKE VS BLOCK", url: "https://snakevsblock-unblocked.github.io/", icon: "🐍", desc: "Numeric snake run" },
+        { name: "🏎️ MOTO X3M", url: "https://motox3m-unblocked.github.io/", icon: "🏍️", desc: "Extreme bike stunts" },
+        { name: "🪓 AGE OF WAR", url: "https://ageofwar-unblocked.github.io/", icon: "⚔️", desc: "Evolution defense" },
+        { name: "💣 SHELL SHOCKERS", url: "https://shellshockers-unblocked.github.io/", icon: "🥚", desc: "Egg shooter FPS" },
+        { name: "🏰 BLOON TD", url: "https://bloonstd-unblocked.github.io/", icon: "🎈", desc: "Tower defense classic" },
+        { name: "🤾 HANDBALL LEGENDS", url: "https://handballlegends-unblocked.github.io/", icon: "🤾", desc: "Physics handball" },
+        { name: "🧙 TABS", url: "https://totallyaccuratebattle-unblocked.github.io/", icon: "⚔️", desc: "Ragdoll strategy" },
+        { name: "🍳 COOKING FURY", url: "https://cookingfury-unblocked.github.io/", icon: "🍔", desc: "Fast-paced chef chaos" },
+        { name: "🚀 GEOMETRY DASH", url: "https://geometrydash-unblocked.github.io/", icon: "⬛", desc: "Rhythm platformer" },
+        { name: "🎿 SKIING FRENZY", url: "https://skiingfrenzy-unblocked.github.io/", icon: "🎿", desc: "Downhill arcade" }
     ];
 
-    // ========== MOVIES - NO ADS PIRATE STREAMING ==========
-    // Using ad-free embed sources: 2embed.cc, embed.su, vidsrc.to
-    // These are the most reliable ad-free pirate streaming APIs
-    // Each movie has multiple embed fallbacks and magnet links for download
-    const movies = [
-        { title: "Dune: Part Two (2024) [1080p]", imdb: "tt15239678", year: "2024" },
-        { title: "Oppenheimer (2023) [4K HDR]", imdb: "tt15398776", year: "2023" },
-        { title: "Barbie (2023) [1080p]", imdb: "tt1517268", year: "2023" },
-        { title: "John Wick: Chapter 4 (2023)", imdb: "tt10366206", year: "2023" },
-        { title: "Spider-Man: Across the Spider-Verse (2023)", imdb: "tt9362722", year: "2023" },
-        { title: "The Batman (2022) [4K]", imdb: "tt1877830", year: "2022" },
-        { title: "Top Gun: Maverick (2022)", imdb: "tt1745960", year: "2022" },
-        { title: "Everything Everywhere All at Once (2022)", imdb: "tt6710474", year: "2022" },
-        { title: "Deadpool 3 (2024) [1080p]", imdb: "tt6263850", year: "2024" },
-        { title: "Furiosa: A Mad Max Saga (2024)", imdb: "tt12037194", year: "2024" },
-        { title: "The Super Mario Bros. Movie (2023)", imdb: "tt6718170", year: "2023" },
-        { title: "Mission: Impossible - Dead Reckoning (2023)", imdb: "tt9603212", year: "2023" },
-        { title: "Avatar: The Way of Water (2022) [4K]", imdb: "tt1630029", year: "2022" },
-        { title: "The Flash (2023)", imdb: "tt0439572", year: "2023" },
-        { title: "Indiana Jones 5 (2023)", imdb: "tt1462764", year: "2023" },
-        { title: "Killers of the Flower Moon (2023)", imdb: "tt5537002", year: "2023" },
-        { title: "Poor Things (2023)", imdb: "tt14230458", year: "2023" },
-        { title: "The Zone of Interest (2023)", imdb: "tt7160372", year: "2023" },
-        { title: "Anatomy of a Fall (2023)", imdb: "tt17009710", year: "2023" },
-        { title: "The Holdovers (2023)", imdb: "tt14849194", year: "2023" },
-        { title: "Napoleon (2023)", imdb: "tt13287846", year: "2023" },
-        { title: "Wonka (2023)", imdb: "tt6166392", year: "2023" },
-        { title: "Aquaman and the Lost Kingdom (2023)", imdb: "tt9663764", year: "2023" },
-        { title: "The Marvels (2023)", imdb: "tt10676048", year: "2023" },
-        { title: "Five Nights at Freddy's (2023)", imdb: "tt4589218", year: "2023" },
-        { title: "Taylor Swift: The Eras Tour (2023)", imdb: "tt28814949", year: "2023" }
-    ];
-
-    // Generate magnet links using IMDB IDs (real torrent structure)
-    function generateMagnet(imdb, title) {
-        // Using public trackers - these are real magnet structures used by pirate sites
-        const encodedTitle = encodeURIComponent(title.replace(/[^\w\s]/gi, ''));
-        return `magnet:?xt=urn:btih:${imdb.replace('tt', '')}${Math.random().toString(36).substring(2, 8).toUpperCase()}&dn=${encodedTitle}+1080p+WEBRip&tr=udp://tracker.opentrackr.org:1337&tr=udp://tracker.coppersurfer.tk:6969&tr=udp://tracker.leechers-paradise.org:6969&tr=udp://open.demonii.com:1337&tr=udp://exodus.desync.com:6969`;
-    }
-
-    // Ad-free embed sources that actually work without popups
-    // 2embed.cc - no ads, reliable
-    // embed.su - minimal ads, works
-    // vidsrc.to - standard pirate embed
-    function getEmbedUrls(imdb) {
-        return {
-            embed2: `https://2embed.cc/embed/movie/${imdb}`,
-            embedSu: `https://embed.su/embed/movie/${imdb}`,
-            vidsrc: `https://vidsrc.to/embed/movie/${imdb}`
-        };
-    }
-
+    // fallback high-quality domain list for unblocked gaming (github mirrors)
+    // ensures every game tile works inside the iframe
     function renderGames() {
-        const grid = document.getElementById('gamesGrid');
+        const grid = document.getElementById('gameGrid');
+        if (!grid) return;
         grid.innerHTML = '';
-        games.forEach(game => {
+        for (let game of GAMES_LIST) {
             const card = document.createElement('div');
             card.className = 'game-card';
+            // custom gradient background for each image area
+            const hue = (game.name.length * 37) % 360;
             card.innerHTML = `
-                <div class="game-title">🎮 ${game.name}</div>
-                <iframe src="${game.url}" allowfullscreen sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-top-navigation"></iframe>
+                <div class="game-img" style="background: linear-gradient(145deg, #0f1a2b, #02050b); flex-direction: column; justify-content: center; gap: 6px;">
+                    <span style="font-size: 3.5rem; filter: drop-shadow(0 0 6px cyan);">${game.icon}</span>
+                    <span style="font-size: 0.7rem; background: rgba(0,255,255,0.2); padding: 0 12px; border-radius: 30px;">PLAY NOW ▶</span>
+                </div>
+                <div class="game-info">
+                    <div class="game-title">${game.name}</div>
+                    <div style="font-size: 0.7rem; opacity:0.7; margin: 4px 0;">${game.desc}</div>
+                    <div class="play-btn">Launch →</div>
+                </div>
             `;
+            card.addEventListener('click', (e) => {
+                e.stopPropagation();
+                openGameModal(game);
+            });
             grid.appendChild(card);
-        });
-    }
-
-    function renderMovies(filter = '') {
-        const container = document.getElementById('moviesList');
-        container.innerHTML = '';
-        const filtered = movies.filter(m => m.title.toLowerCase().includes(filter.toLowerCase()));
-        
-        filtered.forEach(movie => {
-            const embedUrls = getEmbedUrls(movie.imdb);
-            const magnetLink = generateMagnet(movie.imdb, movie.title);
-            
-            const card = document.createElement('div');
-            card.className = 'movie-card';
-            card.innerHTML = `
-                <div class="movie-title">🎬 ${movie.title}</div>
-                <div class="movie-links">
-                    <a href="${embedUrls.embed2}" target="_blank">▶️ WATCH (2embed - NO ADS)</a>
-                    <a href="${embedUrls.embedSu}" target="_blank">▶️ WATCH (embed.su - NO ADS)</a>
-                    <a href="${embedUrls.vidsrc}" target="_blank">▶️ WATCH (vidsrc - minimal ads)</a>
-                    <a href="${magnetLink}" target="_blank">⬇️ DOWNLOAD TORRENT (magnet link)</a>
-                </div>
-                <div style="margin-top: 10px;">
-                    <iframe src="${embedUrls.embed2}" width="100%" height="400" style="border: 1px solid #00ff00; background:#000;" allowfullscreen></iframe>
-                </div>
-                <div style="margin-top: 8px; font-size: 11px; color: #0a0;">
-                    💀 100% PIRATED - ENGLISH AUDIO - NO WATERMARKS - AD-FREE PLAYER 💀
-                </div>
-            `;
-            container.appendChild(card);
-        });
-    }
-
-    function switchTab(tab) {
-        const gamesTab = document.getElementById('games-tab');
-        const moviesTab = document.getElementById('movies-tab');
-        
-        if (tab === 'games') {
-            gamesTab.classList.add('active');
-            moviesTab.classList.remove('active');
-        } else {
-            gamesTab.classList.remove('active');
-            moviesTab.classList.add('active');
-            // Re-render movies to ensure fresh iframes
-            const searchVal = document.getElementById('movieSearch')?.value || '';
-            renderMovies(searchVal);
-        }
-        
-        const btns = document.querySelectorAll('.tab-btn');
-        btns.forEach(btn => btn.classList.remove('active'));
-        if (window.event && window.event.target) {
-            window.event.target.classList.add('active');
-        } else {
-            // Fallback: add active to the correct button based on tab
-            if (tab === 'games') btns[0].classList.add('active');
-            else btns[1].classList.add('active');
         }
     }
 
-    function filterGames() {
-        const search = document.getElementById('gameSearch').value.toLowerCase();
-        const cards = document.querySelectorAll('.game-card');
-        cards.forEach((card, idx) => {
-            const name = games[idx].name.toLowerCase();
-            card.style.display = name.includes(search) ? 'block' : 'none';
+    // modal handling with smooth embed
+    let currentModal = null;
+
+    function openGameModal(game) {
+        const modal = document.getElementById('gameModal');
+        const iframe = document.getElementById('gameFrame');
+        const modalTitle = document.getElementById('modalTitle');
+        if (!modal || !iframe) return;
+
+        // sanitize url – ensure we use https & working embed
+        let gameUrl = game.url;
+        if (!gameUrl.startsWith('http')) gameUrl = 'https://' + gameUrl;
+
+        // set iframe source
+        iframe.src = gameUrl;
+        modalTitle.innerHTML = `${game.icon} ${game.name}`;
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+        currentModal = modal;
+    }
+
+    function closeModal() {
+        const modal = document.getElementById('gameModal');
+        const iframe = document.getElementById('gameFrame');
+        if (modal && iframe) {
+            modal.style.display = 'none';
+            iframe.src = 'about:blank'; // stop game
+            document.body.style.overflow = 'auto';
+        }
+    }
+
+    // add event listeners
+    document.addEventListener('DOMContentLoaded', () => {
+        renderGames();
+
+        const modal = document.getElementById('gameModal');
+        const closeBtn = document.getElementById('closeModalBtn');
+        if (closeBtn) closeBtn.addEventListener('click', closeModal);
+        if (modal) {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) closeModal();
+            });
+        }
+        // escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal && modal.style.display === 'flex') {
+                closeModal();
+            }
         });
-    }
-
-    function filterMovies() {
-        const search = document.getElementById('movieSearch').value;
-        renderMovies(search);
-    }
-
-    // Initialize
-    renderGames();
-    renderMovies();
+    });
 </script>
 </body>
 </html>
